@@ -4,7 +4,7 @@
 
 <%= simple_form_for @match do |form| %>
   <%= form.input :played_at, order: [:month, :day, :year] %>
-  <%= form.association :player2, collection: current_user.opponents, label_method: :email, label: "Opponent"  %>
+  <%= form.association :player2, collection: current_user.opponents.order_by_name, label_method: :name, label: "Opponent"  %>
   <%= form.input :player1_score, label: "Your Score" %>
   <%= form.input :player2_score, label: "Their Score" %>
 

@@ -1,0 +1,11 @@
+<h1 class='page-header'>Log Match</h1>
+
+<%= simple_form_for @match do |form| %>
+  <%= form.input :played_at, order: [:month, :day, :year] %>
+  <%= form.association :player2, collection: current_user.opponents, label_method: :email, label: "Opponent"  %>
+  <%= form.input :player1_score, label: "Your Score" %>
+  <%= form.input :player2_score, label: "Their Score" %>
+
+  <%= form.button :submit %>
+  <%= link_to :cancel, :back %>
+<% end %>

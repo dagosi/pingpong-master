@@ -10,6 +10,7 @@ gem 'turbolinks', '~> 2.5.3'
 
 gem 'devise', '~> 3.5.2'
 gem 'devise-bootstrap-views', '~> 0.0.6'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug'

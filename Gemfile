@@ -17,3 +17,7 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails'
 end
+
+group :test do
+  gem 'shoulda-matchers', '~> 3.1'
+end

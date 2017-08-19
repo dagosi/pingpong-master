@@ -10,9 +10,7 @@ describe Match, type: :model do
     it { is_expected.to validate_presence_of(:player1) }
     it { is_expected.to validate_presence_of(:player2) }
     it { is_expected.to validate_presence_of(:player1_score) }
-    it { is_expected.to validate_numericality_of(:player1_score).only_integer.is_greater_than(0) }
     it { is_expected.to validate_presence_of(:player2_score) }
-    it { is_expected.to validate_numericality_of(:player2_score).only_integer.is_greater_than(0) }
     it { is_expected.to validate_presence_of(:played_at) }
 
     context "scores" do

@@ -4,7 +4,7 @@ module MatchesHelper
   end
 
   def show_opponent_of(user, match)
-    match.opponent_of(user).email
+    match.opponent_of(user).name
   end
 
   def show_score(user, match)

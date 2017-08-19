@@ -3,7 +3,7 @@ class Match < ActiveRecord::Base
   belongs_to :player2, class_name: "User"
 
   validates :player1, :player2, :player1_score, :player2_score, :played_at, presence: true
-  validates :player1_score, :player2_score, numericality: { only_integer: true, greater_than: 0 }
+  validates :player1_score, :player2_score, numericality: { only_integer: true, greater_than_or_equal: 0 }
   validate :validate_wining_score
 
   after_create :update_players_ratings

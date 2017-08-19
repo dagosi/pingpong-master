@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819212603) do
+ActiveRecord::Schema.define(version: 20170819221044) do
 
   create_table "matches", force: :cascade do |t|
     t.integer  "player1_id",    null: false
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170819212603) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.integer  "score",                  default: 0,  null: false
+    t.string   "name"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

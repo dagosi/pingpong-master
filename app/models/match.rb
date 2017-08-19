@@ -4,8 +4,9 @@ class Match < ActiveRecord::Base
 
   validates :player1, :player2, :player1_score, :player2_score, :played_at, presence: true
   validates :player1_score, :player2_score, numericality: { only_integer: true, greater_than: 0 }
-
   validate :validate_wining_score
+
+  after_create :update_players_ratings
 
   def opponent_of(user)
     check_user_in_match!(user)
@@ -48,5 +49,11 @@ private
         errors.add(:player2_score, "There must be a two-point margin winning score")
       end
     end
+  end
+
+  def update_players_ratings
+    ratings = Rating.new(player1, player2, winner).calculate
+    player1.update_attribute(:score, ratings[player1.id])
+    player2.update_attribute(:score, ratings[player2.id])
   end
 end

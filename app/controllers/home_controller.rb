@@ -1,10 +1,7 @@
 class HomeController < ApplicationController
   def index
-  end
-
-  def history
-  end
-
-  def log
+    if current_user
+      @ranked_users = User.order(score: :desc)
+    end
   end
 end

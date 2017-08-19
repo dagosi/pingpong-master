@@ -1,0 +1,24 @@
+<h1 class='page-header'>History</h1>
+
+<!-- <%= image_tag('history.png') %> -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Date</th>
+      <th>Opponent</th>
+      <th>Score</th>
+      <th>Result</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @matches.each do |match| %>
+      <tr>
+        <td><%= show_match_date(match) %></td>
+        <td><%= show_opponent_of(current_user, match) %></td>
+        <td><%= show_score(current_user, match) %></td>
+        <td><%= show_result(current_user, match) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

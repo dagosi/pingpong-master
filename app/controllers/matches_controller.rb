@@ -1,4 +1,8 @@
 class MatchesController < ApplicationController
+  def index
+    @matches = current_user.matches
+  end
+
   def new
     @match = Match.new
   end
@@ -8,7 +12,7 @@ class MatchesController < ApplicationController
     @match.player1 = current_user
 
     if @match.save
-      redirect_to "/history"
+      redirect_to matches_url
     else
       render :new
     end

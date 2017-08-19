@@ -64,4 +64,48 @@ describe Match, type: :model do
       end
     end
   end
+
+  describe "#opponent_of" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "returns player1 as the opponent" do
+      match = FactoryGirl.create(:match, player2: user)
+      expect(match.opponent_of(user)).to eq(match.player1)
+    end
+
+    it "returns player2 as the opponent" do
+      match = FactoryGirl.create(:match, player1: user)
+      expect(match.opponent_of(user)).to eq(match.player2)
+    end
+
+    it "raises an exception if the user is not part of the match" do
+      match = FactoryGirl.create(:match)
+
+      expect {
+        match.opponent_of(user)
+      }.to raise_error(ArgumentError, "User didn't play this match")
+    end
+  end
+
+  describe "#winner?" do
+    let(:user) { FactoryGirl.create(:user) }
+
+    it "returns true if the user won" do
+      match = FactoryGirl.create(:match, player1: user, player1_score: 21, player2_score: 15)
+      expect(match.winner?(user)).to be_truthy
+    end
+
+    it "returns false if the user lost" do
+      match = FactoryGirl.create(:match, player1: user, player1_score: 8, player2_score: 21)
+      expect(match.winner?(user)).to be_falsey
+    end
+
+    it "raises an exception if the user is not part of the match" do
+      match = FactoryGirl.create(:match)
+
+      expect {
+        match.winner?(user)
+      }.to raise_error(ArgumentError, "User didn't play this match")
+    end
+  end
 end

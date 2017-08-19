@@ -7,7 +7,33 @@ class Match < ActiveRecord::Base
 
   validate :validate_wining_score
 
+  def opponent_of(user)
+    check_user_in_match!(user)
+    user == player1 ? player2 : player1
+  end
+
+  def winner?(user)
+    check_user_in_match!(user)
+    winner == user
+  end
+
+  def user_score(user)
+    user == player1 ? player1_score : player2_score
+  end
+
+  def opponent_score(user)
+    user == player1 ? player2_score : player1_score
+  end
+
 private
+  def winner
+    player1_score > player2_score ? player1 : player2
+  end
+
+  def check_user_in_match!(user)
+    raise ArgumentError, "User didn't play this match" unless user.in? [player1, player2]
+  end
+
   def validate_wining_score
     return if player1_score.nil? || player2_score.nil?
 
